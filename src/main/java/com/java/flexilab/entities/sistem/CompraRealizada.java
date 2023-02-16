@@ -1,8 +1,6 @@
 package com.java.flexilab.entities.sistem;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +15,18 @@ public class CompraRealizada {
     @GeneratedValue
     private Integer id;
 
-    private List<Producto> productos;
     private LocalDate fecha;
     private LocalTime hora;
     private Integer precio;
+
+    @ManyToMany
+    @JoinTable(name ="ProductoxCompra",
+            joinColumns =
+                 @JoinColumn (name = "CompraRealizadaID"),
+            inverseJoinColumns =
+                 @JoinColumn (name = "ProductoID"))
+    private List<Producto> producto;
+
 
     public CompraRealizada(){
         super();

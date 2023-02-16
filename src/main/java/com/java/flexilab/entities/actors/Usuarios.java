@@ -1,9 +1,13 @@
 package com.java.flexilab.entities.actors;
 
 import com.java.flexilab.entities.sistem.CompraRealizada;
-import jakarta.persistence.*;
+import com.java.flexilab.entities.sistem.MetodoPago;
+import com.java.flexilab.entities.sistem.Producto;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -12,15 +16,30 @@ public class Usuarios {
     @Id
     @GeneratedValue
     private  Integer id;
-
+    @Column
     private String usuario ;
+    @Column
     private String contrasenia;
+    @Column
     private String nombre;
-    @ManyToOne
-    private CompraRealizada comprasRealizadas;
+    @Column
+    private String pais;
+
+    private MetodoPago metodoPago;
+
+    @OneToMany
+    private List<CompraRealizada> comprasRealizadas;
+
 
    public Usuarios(){
        super();
+       if (pais == "ARGETINA"){
+           metodoPago = MetodoPago.MERCADOPAGO;
+       }
+       else{
+           metodoPago = MetodoPago.TRANSFERENCIADOLAR;
+       }
+
    }
 
 }

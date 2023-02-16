@@ -1,6 +1,6 @@
 package com.java.flexilab.db;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.function.Supplier;
 

@@ -1,6 +1,6 @@
 package com.java.flexilab.entities.sistem;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
