@@ -4,9 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
-
+@Setter
+@Getter
 @Entity
 public class ArticulosBlog {
 
@@ -25,5 +28,12 @@ public class ArticulosBlog {
     private String descripcion3;
     private LocalDate fechaCreacion;
 
-    private String categoria;
+    @ManyToOne
+    private CategoriaBlog categoriaBlog;
+
+    public ArticulosBlog(){
+        super();
+    }
+
+
 }

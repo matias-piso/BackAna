@@ -1,10 +1,12 @@
 package com.java.flexilab.entities.actors;
 
 import com.java.flexilab.entities.sistem.CompraRealizada;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 public class Usuarios {
     @Id
@@ -14,5 +16,11 @@ public class Usuarios {
     private String usuario ;
     private String contrasenia;
     private String nombre;
+    @ManyToOne
     private CompraRealizada comprasRealizadas;
+
+   public Usuarios(){
+       super();
+   }
+
 }

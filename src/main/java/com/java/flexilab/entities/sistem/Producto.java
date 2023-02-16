@@ -1,9 +1,11 @@
 package com.java.flexilab.entities.sistem;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 @Entity
 public class Producto {
     @Id
@@ -18,4 +20,8 @@ public class Producto {
 
     @ManyToOne
     private Categoria categoria;
+
+    public Producto(){
+        super();
+    }
 }
