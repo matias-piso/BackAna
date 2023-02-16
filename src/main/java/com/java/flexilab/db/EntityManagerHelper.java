@@ -1,6 +1,7 @@
-package capgemini.tp.campgemini20.db;
+package com.java.flexilab.db;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.function.Supplier;
 
 public class EntityManagerHelper {

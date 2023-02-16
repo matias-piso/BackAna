@@ -1,11 +1,11 @@
-package capgemini.tp.campgemini20.converters;
+package com.java.flexilab.converters;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 import java.sql.Date;
 import java.time.LocalDate;
 
-@Converter (autoApply = true)
+@Converter(autoApply = true)
 public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {
 
     //convierte desde objetos tipo java a objetos tipo sql
