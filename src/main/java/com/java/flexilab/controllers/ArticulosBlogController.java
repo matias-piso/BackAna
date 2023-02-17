@@ -1,12 +1,16 @@
 package com.java.flexilab.controllers;
 
 
+import com.java.flexilab.entities.sistem.ArticulosBlog;
+import com.java.flexilab.services.ArticulosBlogServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
-@AllArgsConstructor
-public class ArticulosBlogController {
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/api/v1/articulosblog")
+public class ArticulosBlogController extends BaseControllerImpl<ArticulosBlog, ArticulosBlogServiceImpl> {
+
 }

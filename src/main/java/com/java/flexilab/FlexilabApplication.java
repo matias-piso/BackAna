@@ -8,8 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan (basePackages = {"com.java.flexilab"})
-@EnableJpaRepositories(basePackages = {"com.java.flexilab.repositories"})
 public class FlexilabApplication {
 
 	public static void main(String[] args) {

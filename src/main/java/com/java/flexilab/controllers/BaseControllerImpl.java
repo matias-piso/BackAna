@@ -17,7 +17,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     protected S service;
 
     @Override
-    @GetMapping(path = {"/persons","/persons/"})
+    @GetMapping(path = {"","/"})
     public ResponseEntity<?> getAllRecords() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
@@ -28,7 +28,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
 
     /* REVISAR */
     @Override
-    @GetMapping(path = {"/persons/page","/persons/page/"})
+    @GetMapping(path = {"/page","/page/"})
     public ResponseEntity<?> getRecordBy(@PageableDefault(size = 20) Pageable pageable) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.findAll(pageable));
@@ -38,7 +38,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     }
 
     @Override
-    @GetMapping(path = {"/person/{id}","/person/{id}/"})
+    @GetMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<?> getRecordById(@PathVariable Integer id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
@@ -48,7 +48,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     }
 
     @Override
-    @PostMapping(path = {"/person","/person/"})
+    @PostMapping(path = {"","/"})
     public ResponseEntity<?> saveRecord(@RequestBody E entity) {
         if (true) { // falta validar campos
             System.out.println("Es una persona");
@@ -70,7 +70,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     }
 
     @Override
-    @PutMapping(path = {"/person/{id}","/person/{id}/"})
+    @PutMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<?> updateRecord(@PathVariable Integer id, @RequestBody E entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.update(id,entity));
@@ -80,7 +80,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     }
 
     @Override
-    @DeleteMapping(path = {"/person/{id}","/person/{id}/"})
+    @DeleteMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<?> deleteRecord(@PathVariable Integer id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.delete(id));
