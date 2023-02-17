@@ -28,8 +28,8 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
-
-        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
+ /* el parametro de  new JWTAuthenticationFilter(authManager) estaba vacio pero tiraba error por eso lo puse*/
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(authManager);
         jwtAuthenticationFilter.setAuthenticationManager(authManager);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 

@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UsuariosRepo extends JpaRepository <UsuariosRepo, Integer>{
+public interface UsuariosRepo extends JpaRepository<Usuarios, Integer> {
     static Optional<Usuarios> findoneByEmail(String email) {
-
         return null;
     }
 }
