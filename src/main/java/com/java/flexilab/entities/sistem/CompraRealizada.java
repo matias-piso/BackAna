@@ -14,9 +14,11 @@ public class CompraRealizada {
     @Id
     @GeneratedValue
     private Integer id;
-
+    @Column
     private LocalDate fecha;
+    @Column
     private LocalTime hora;
+    @Column
     private Integer precio;
 
     @ManyToMany

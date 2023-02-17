@@ -15,11 +15,15 @@ public class Producto {
     @Id
     @GeneratedValue
     private  Integer id;
-
+    @Column
     private String nombre ;
+    @Column
     private String descripcion;
+    @Column
     private Integer precioDolar;
+    @Column
     private Integer precioPesos;
+    @Column
     private  String UrlFoto;
 
     @ManyToOne

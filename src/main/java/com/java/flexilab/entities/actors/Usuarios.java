@@ -17,14 +17,14 @@ public class Usuarios {
     @GeneratedValue
     private  Integer id;
     @Column
-    private String usuario ;
+    private String email ;
     @Column
-    private String contrasenia;
+    private String password;
     @Column
     private String nombre;
     @Column
     private String pais;
-
+    @Column
     private MetodoPago metodoPago;
 
     @OneToMany
