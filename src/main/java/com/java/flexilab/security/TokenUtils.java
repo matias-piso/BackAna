@@ -16,35 +16,62 @@ import java.util.Map;
 
 
 public class TokenUtils {
-    private final static String ACCES_TOKEN_SECRET = "ASDBNSDIUFBNASDPIUOFGNAasdasasdJNFIKASJHDNFIUBNASDIPFBN";
-    private final static Long   ACCES_TOKEN_VALIDITY_SECONDS = Long.valueOf("2.592.000L");
 
-    public   static  String createToken(String nombre, String email){
-        long expirationTime = ACCES_TOKEN_VALIDITY_SECONDS * 1000;
+    // Clave secreta para firmar el token
+    private final static String ACCESS_TOKEN_SECRET = "ASDBNSDIUFBNASDPIUOFGNAasdasasdJNFIKASJHDNFIUBNASDIPFBN";
+
+    // Tiempo de validez del token (30 días en segundos)
+    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 30 * 24 * 60 * 60L;
+
+    /**
+     * Crea un token JWT con el email y nombre del usuario y lo firma con la clave secreta.
+     *
+     * @param nombre Nombre del usuario.
+     * @param email Email del usuario.
+     * @return Token JWT firmado.
+     */
+    public static String createToken(String nombre, String email) {
+
+        // Se calcula la fecha de expiración sumando el tiempo de validez en milisegundos a la fecha actual.
+        long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
-        Map <String,Object> extra = new HashMap<>();
-            extra.put("nombre",nombre);
+        // Se incluye el nombre del usuario como claim adicional.
+        Map<String, Object> extra = new HashMap<>();
+        extra.put("nombre", nombre);
 
-
-        return  Jwts.builder()
+        // Se construye y firma el token JWT con la clave secreta.
+        return Jwts.builder()
                 .setSubject(email)
                 .setExpiration(expirationDate)
                 .addClaims(extra)
-                .signWith(SignatureAlgorithm.HS256, Keys.hmacShaKeyFor(ACCES_TOKEN_SECRET.getBytes()))
+                .signWith(SignatureAlgorithm.HS256, Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
                 .compact();
     }
-    public static UsernamePasswordAuthenticationToken getAuthentication(String token){
+
+    /**
+     * Obtiene la autenticación de Spring Security a partir de un token JWT.
+     *
+     * @param token Token JWT a verificar.
+     * @return Objeto de autenticación de Spring Security si el token es válido, o null en caso contrario.
+     */
+    public static UsernamePasswordAuthenticationToken getAuthentication(String token) {
         try {
+            // Se decodifica el token JWT y se obtienen los claims.
             Claims claims = Jwts.parser()
-                    .setSigningKey(ACCES_TOKEN_SECRET.getBytes())
+                    .setSigningKey(ACCESS_TOKEN_SECRET.getBytes())
                     .parseClaimsJws(token)
                     .getBody();
+
+            // Se obtiene el email del usuario a partir del claim "subject".
             String email = claims.getSubject();
+
+            // Se devuelve un objeto de autenticación de Spring Security con el email del usuario.
             return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
-        }catch (JwtException e){
+
+        } catch (JwtException e) {
+            // Si ocurre algún error al decodificar el token, se devuelve null indicando que la autenticación falló.
             return null;
         }
     }
-
 }
