@@ -1,9 +1,10 @@
 package com.java.flexilab.entities.actors;
 
+import com.java.flexilab.entities.Base;
 import com.java.flexilab.entities.sistem.CompraRealizada;
 import com.java.flexilab.entities.sistem.MetodoPago;
-import com.java.flexilab.entities.sistem.Producto;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class Usuarios {
-    @Id
-    @GeneratedValue
-    private  Integer id;
+public class Usuarios extends Base {
     @Column
     private String email ;
     @Column
@@ -33,12 +31,14 @@ public class Usuarios {
 
    public Usuarios(){
        super();
-       if (pais == "ARGETINA"){
-           metodoPago = MetodoPago.MERCADOPAGO;
+       /*
+       if (this.pais.toUpperCase() == "ARGENTINA"){
+           this.metodoPago = MetodoPago.MERCADOPAGO;
        }
        else{
-           metodoPago = MetodoPago.TRANSFERENCIADOLAR;
+           this.metodoPago = MetodoPago.TRANSFERENCIADOLAR;
        }
+        */
 
    }
 

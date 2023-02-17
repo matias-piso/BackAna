@@ -1,19 +1,16 @@
 package com.java.flexilab.entities.actors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
+import com.java.flexilab.entities.Base;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
-public class Admin {
-    @Id
-    @GeneratedValue
-    private  Integer id;
+public class Admin extends Base {
     @Column
     private String usuario ;
     @Column

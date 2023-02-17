@@ -1,8 +1,9 @@
 package com.java.flexilab.entities.sistem;
 
 import com.java.flexilab.DTO.AdminDTO;
+import com.java.flexilab.entities.Base;
 import com.java.flexilab.entities.actors.Admin;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,11 +11,8 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-public class ArticulosBlog {
+public class ArticulosBlog extends Base {
 
-    @Id
-    @GeneratedValue
-    private Integer id;
     @Column
     private String urlImagen;
     @Column

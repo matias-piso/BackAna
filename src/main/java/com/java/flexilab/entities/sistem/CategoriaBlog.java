@@ -1,16 +1,16 @@
 package com.java.flexilab.entities.sistem;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import com.java.flexilab.entities.Base;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
-public class CategoriaBlog {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class CategoriaBlog extends Base {
+
     @Column
     private String nombre;
 

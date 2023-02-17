@@ -1,20 +1,19 @@
 package com.java.flexilab.entities.sistem;
 
+import com.java.flexilab.entities.Base;
 import com.java.flexilab.entities.actors.Admin;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import java.util.List;
 
 @Setter
 @Getter
 @Entity
-public class Producto {
-    @Id
-    @GeneratedValue
-    private  Integer id;
+public class Producto extends Base {
+
     @Column
     private String nombre ;
     @Column

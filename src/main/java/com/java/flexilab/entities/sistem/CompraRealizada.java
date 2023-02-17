@@ -1,6 +1,8 @@
 package com.java.flexilab.entities.sistem;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import com.java.flexilab.entities.Base;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +12,8 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class CompraRealizada {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class CompraRealizada extends Base {
+
     @Column
     private LocalDate fecha;
     @Column
