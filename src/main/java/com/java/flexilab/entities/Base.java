@@ -14,7 +14,7 @@ public class Base implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer personaId;
+    private Integer id;
 
     public Base() {
         super();

@@ -3,6 +3,7 @@ package com.java.flexilab.controllers;
 import com.java.flexilab.entities.Base;
 import com.java.flexilab.interfaces.BaseController;
 import com.java.flexilab.services.BaseServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -49,7 +50,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
 
     @Override
     @PostMapping(path = {"","/"})
-    public ResponseEntity<?> saveRecord(@RequestBody E entity) {
+    public ResponseEntity<?> saveRecord(@Valid @RequestBody E entity) {
         if (true) { // falta validar campos
             System.out.println("Es una persona");
             try {
@@ -71,7 +72,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
 
     @Override
     @PutMapping(path = {"/{id}","/{id}/"})
-    public ResponseEntity<?> updateRecord(@PathVariable Integer id, @RequestBody E entity) {
+    public ResponseEntity<?> updateRecord(@PathVariable Integer id,@Valid @RequestBody E entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.update(id,entity));
         } catch (Exception e) {

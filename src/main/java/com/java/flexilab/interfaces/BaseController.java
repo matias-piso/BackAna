@@ -15,4 +15,5 @@ public interface BaseController <E extends Base, ID extends Serializable> {
     public ResponseEntity<?> saveRecord(@RequestBody E entity) throws Exception;
     public ResponseEntity<?> updateRecord(@PathVariable ID id,@RequestBody E entity) throws Exception;
     public ResponseEntity<?> deleteRecord(@PathVariable ID id) throws Exception;
+
 }

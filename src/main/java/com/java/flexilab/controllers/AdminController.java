@@ -3,7 +3,10 @@ package com.java.flexilab.controllers;
 import com.java.flexilab.entities.actors.Admin;
 import com.java.flexilab.services.AdminServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,5 +14,4 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/v1/admins")
 public class AdminController extends BaseControllerImpl<Admin, AdminServiceImpl> {
-
 }
