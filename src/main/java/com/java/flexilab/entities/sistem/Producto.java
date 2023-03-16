@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import jakarta.persistence.Entity;
-import java.util.List;
 
 @Setter
 @Getter
@@ -25,14 +24,20 @@ public class Producto extends Base {
     @Column
     private  String UrlFoto;
 
+    private Integer visitas;
+
     @ManyToOne
     private Categoria categoria;
 
     @ManyToOne
     private Admin admin;
 
-
     public Producto(){
         super();
+        this.visitas = 0;
+    }
+
+    public void sumarVisita(){
+        this.visitas++;
     }
 }
