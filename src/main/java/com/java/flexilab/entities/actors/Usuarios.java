@@ -2,11 +2,9 @@ package com.java.flexilab.entities.actors;
 
 import com.java.flexilab.entities.Base;
 import com.java.flexilab.entities.sistem.CompraRealizada;
-import com.java.flexilab.entities.sistem.MetodoPago;
+import com.java.flexilab.entities.sistem.EnumMetodoPago;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +23,7 @@ public class Usuarios extends Base {
     @Column
     private String pais;
     @Column
-    private MetodoPago metodoPago;
+    private EnumMetodoPago metodoPago;
 
     @OneToMany
     private List<CompraRealizada> comprasRealizadas;

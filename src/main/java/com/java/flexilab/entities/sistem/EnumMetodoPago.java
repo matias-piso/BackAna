@@ -1,6 +1,6 @@
 package com.java.flexilab.entities.sistem;
 
-public enum MetodoPago {
+public enum EnumMetodoPago {
     TRANSFERENCIADOLAR,
     MERCADOPAGO
 }

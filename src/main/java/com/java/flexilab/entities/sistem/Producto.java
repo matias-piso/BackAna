@@ -22,9 +22,11 @@ public class Producto extends Base {
     @Column
     private Integer precioPesos;
     @Column
-    private  String UrlFoto;
-
+    private String UrlFoto;
+    @Column
     private Integer visitas;
+    @Column
+    private EnumNivel nivel;
 
     @ManyToOne
     private Categoria categoria;
