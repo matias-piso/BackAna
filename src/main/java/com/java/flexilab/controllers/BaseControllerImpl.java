@@ -52,20 +52,12 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     @PostMapping(path = {"","/"})
     public ResponseEntity<?> saveRecord(@Valid @RequestBody E entity) {
         if (true) { // falta validar campos
-            System.out.println("Es una persona");
             try {
-                /*
-                HttpHeaders headers = new HttpHeaders();
-                headers.add("Mi-Encabezado", "999");
-                String mensaje = "Mensaje de respuesta";
-                return new ResponseEntity<>(mensaje, headers, HttpStatus.OK);
-                 */
                 return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");
             }
         } else {
-            System.out.println("No es una persona");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Los campos no son validos");
         }
     }

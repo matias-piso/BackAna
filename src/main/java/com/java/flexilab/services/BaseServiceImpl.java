@@ -79,7 +79,8 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
         try {
             Optional<E> entityOptional = baseRepository.findById(id);
             if (entityOptional.isPresent()) {
-                baseRepository.delete(entityOptional.get());
+                entityOptional.get().setActivo(false);
+                baseRepository.save(entityOptional.get());
                 return true;
             }
             return false;
