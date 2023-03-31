@@ -12,7 +12,6 @@ import jakarta.persistence.Entity;
 @Getter
 @Entity
 public class Producto extends Base {
-
     @Column
     private String nombre ;
     @Column
@@ -22,11 +21,15 @@ public class Producto extends Base {
     @Column
     private Integer precioPesos;
     @Column
+    private Integer precioEuros;
+    @Column
     private String UrlFoto;
     @Column
     private Integer visitas;
     @Column
     private EnumNivel nivel;
+    @Column
+    private EnumPack pack;
 
     @ManyToOne
     private Categoria categoria;

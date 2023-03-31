@@ -5,7 +5,9 @@ import com.java.flexilab.interfaces.BaseController;
 import com.java.flexilab.services.BaseServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,11 +29,13 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
         }
     }
 
-    /* REVISAR */
     @Override
-    @GetMapping(path = {"/page","/page/"})
-    public ResponseEntity<?> getRecordBy(@PageableDefault(size = 20) Pageable pageable) {
+    @GetMapping(path = {"/page"})
+    public ResponseEntity<?> getRecordBy(Pageable pageable, @RequestParam(name = "sort", required = false) String sort) {
         try {
+            if (sort != null) {
+                pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(sort));
+            }
             return ResponseEntity.status(HttpStatus.OK).body(service.findAll(pageable));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");

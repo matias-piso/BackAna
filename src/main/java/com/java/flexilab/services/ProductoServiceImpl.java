@@ -2,6 +2,7 @@ package com.java.flexilab.services;
 
 import com.java.flexilab.entities.sistem.Categoria;
 import com.java.flexilab.entities.sistem.EnumNivel;
+import com.java.flexilab.entities.sistem.EnumPack;
 import com.java.flexilab.entities.sistem.Producto;
 import com.java.flexilab.interfaces.ProductoService;
 import com.java.flexilab.repositories.BaseRepository;
@@ -38,4 +39,23 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Integer> impl
     public Page<Producto> findByNivel(EnumNivel nivel, Pageable pageable) {
         return productoRepo.findByNivel(nivel, pageable);
     }
+
+    public Page<Producto> findByCategoriaAndNivelAndPack(String categoria, EnumNivel nivel, EnumPack pack, Pageable pageable) {
+        Categoria cat = categoriaRepo.findByNombre(categoria);
+        return productoRepo.findByCategoriaAndNivelAndPack(cat, nivel, pack, pageable);
+    }
+
+    public Page<Producto> findByPack(EnumPack pack, Pageable pageable) {
+        return productoRepo.findByPack(pack, pageable);
+    }
+
+    public Page<Producto> findByCategoriaAndPack(String categoria, EnumPack pack, Pageable pageable) {
+        Categoria cat = categoriaRepo.findByNombre(categoria);
+        return productoRepo.findByCategoriaAndPack(cat, pack, pageable);
+    }
+
+    public Page<Producto> findByNivelAndPack(EnumNivel nivel, EnumPack pack, Pageable pageable) {
+        return productoRepo.findByNivelAndPack(nivel, pack, pageable);
+    }
+
 }

@@ -20,6 +20,8 @@ public class ArticulosBlog extends Base {
     @Column
     private String video;
     @Column
+    private String breveIntroduccion;
+    @Column
     private String subtitulo1;
     @Column
     private String descripcion1;
@@ -42,6 +44,7 @@ public class ArticulosBlog extends Base {
 
     public ArticulosBlog(){
         super();
+        this.fechaCreacion = LocalDate.now();
     }
 
 
