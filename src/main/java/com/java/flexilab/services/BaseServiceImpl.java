@@ -28,9 +28,27 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
     }
 
     @Override
+    public List<E> findAllByActivoTrue() throws Exception {
+        try {
+            return baseRepository.findByActivoTrue();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public Page<E> findAll(Pageable pageable) throws Exception {
         try {
             return baseRepository.findAll(pageable);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Page<E> findAllByActivoTrue(Pageable pageable) throws Exception {
+        try {
+            return baseRepository.findByActivoTrue(pageable);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

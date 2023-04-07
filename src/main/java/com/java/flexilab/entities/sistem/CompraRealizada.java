@@ -3,6 +3,8 @@ package com.java.flexilab.entities.sistem;
 import jakarta.persistence.*;
 
 import com.java.flexilab.entities.Base;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +20,11 @@ public class CompraRealizada extends Base {
     private LocalDate fecha;
     @Column
     private LocalTime hora;
+    @NotNull(message = "El precio no puede estar vacio")
     @Column
     private Integer precio;
 
+    @NotNull(message = "Los productos no pueden estar vacios")
     @ManyToMany
     @JoinTable(name ="ProductoxCompra",
             joinColumns =
@@ -32,5 +36,7 @@ public class CompraRealizada extends Base {
 
     public CompraRealizada(){
         super();
+        this.fecha = LocalDate.now();
+        this.hora = LocalTime.now();
     }
 }

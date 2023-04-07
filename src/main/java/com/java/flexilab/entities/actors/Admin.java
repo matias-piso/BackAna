@@ -13,8 +13,10 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Admin extends Base {
+    @NotBlank(message = "El nombre no puede estar vacio")
     @Column
-    private String usuario ;
+    private String usuario;
+    @NotBlank(message = "La contraseña no puede estar vacia")
     @Column
     private String contrasenia;
 
