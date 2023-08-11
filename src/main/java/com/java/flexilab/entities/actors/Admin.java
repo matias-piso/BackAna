@@ -20,8 +20,13 @@ public class Admin extends Base {
     @Column
     private String contrasenia;
 
-
     public Admin(){
         super();
+    }
+
+    public Admin(String usuario, String contrasenia){
+        super();
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
     }
 }

@@ -27,4 +27,11 @@ public class Categoria extends Base {
     public Categoria(){
         super();
     }
+
+    public Categoria(String nombre, String descripcion, String urlImagen){
+        super();
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.urlImagen = urlImagen;
+    }
 }
