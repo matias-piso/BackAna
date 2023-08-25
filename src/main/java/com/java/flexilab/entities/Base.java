@@ -21,4 +21,5 @@ public class Base implements Serializable {
         super();
         this.activo = true;
     }
+
 }

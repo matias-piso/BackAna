@@ -71,7 +71,7 @@ public class FlexilabApplication {
 			productoRepo.save(producto2);
 
 			// Agregar 10 productos más de prueba
-			for (int i = 3; i <= 12; i++) {
+			for (int i = 3; i <= 15; i++) {
 				Producto producto = new Producto();
 				producto.setNombre("Producto " + i);
 				producto.setDescripcion("Descripción del producto " + i);
