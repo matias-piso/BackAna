@@ -14,4 +14,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/v1/admins")
 public class AdminController extends BaseControllerImpl<Admin, AdminServiceImpl> {
+
 }

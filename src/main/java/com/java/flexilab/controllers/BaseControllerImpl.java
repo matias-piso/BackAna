@@ -21,26 +21,6 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     protected S service;
 
     @Override
-    @GetMapping(path = {"","/"})
-    public ResponseEntity<?> getAllRecords() {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");
-        }
-    }
-
-    @Override
-    @GetMapping(path = {"activos","/activos"})
-    public ResponseEntity<?> getAllRecordsActives() {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.findAllByActivoTrue());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");
-        }
-    }
-
-    @Override
     @GetMapping(path = {"/page"})
     public ResponseEntity<?> getRecordBy(Pageable pageable, @RequestParam(name = "sort", required = false) String sort) {
         try{

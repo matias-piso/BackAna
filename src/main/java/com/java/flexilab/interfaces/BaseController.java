@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.Serializable;
 
 public interface BaseController <E extends Base, ID extends Serializable> {
-    public ResponseEntity<?> getAllRecords() throws Exception;
-    public ResponseEntity<?> getAllRecordsActives() throws Exception;
     public ResponseEntity<?> getRecordBy(Pageable pageable,  @RequestParam(name = "sort", required = false) String sort) throws Exception;
     public ResponseEntity<?> getRecordByActives(Pageable pageable,  @RequestParam(name = "sort", required = false) String sort) throws Exception;
     public ResponseEntity<?> getRecordById(@PathVariable ID id) throws Exception;
