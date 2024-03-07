@@ -62,6 +62,7 @@ public class TokenUtils {
      * @param token El token de acceso.
      * @return La autenticación obtenida a partir del token, o null si el token es inválido.
      */
+
     public static UsernamePasswordAuthenticationToken getAutentication(String token) throws Exception {
         String email;
 

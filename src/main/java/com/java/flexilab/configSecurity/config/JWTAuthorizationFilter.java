@@ -47,6 +47,9 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
                 // Verifico que el usuario tenga el rol necesario para acceder al recurso
                 // el getAuthorities() devuelve una lista de GrantedAuthority con los roles del usuario
+
+                System.out.println("usernamePAT.getAuthorities(): " + usernamePAT.getAuthorities());
+
                 if (usernamePAT.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(role))) {
                     SecurityContextHolder.getContext().setAuthentication(usernamePAT);
                 } else {

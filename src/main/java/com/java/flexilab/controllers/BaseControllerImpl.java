@@ -25,7 +25,13 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     public ResponseEntity<?> getRecordBy(Pageable pageable, @RequestParam(name = "sort", required = false) String sort) {
         try{
             if (sort != null) {
-                pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(sort));
+                String[] sortArr = sort.split(",");
+                if (sortArr.length == 2) {
+                    Sort.Direction direction = sortArr[1].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+                    pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), direction, sortArr[0]);
+                }else{
+                    pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(sort));
+                }
             }
             return ResponseEntity.status(HttpStatus.OK).body(service.findAll(pageable));
         } catch (Exception e) {

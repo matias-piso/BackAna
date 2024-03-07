@@ -1,5 +1,7 @@
 package com.java.flexilab.entities.actors;
 
+import com.java.flexilab.configSecurity.model.Rol;
+import com.java.flexilab.configSecurity.model.User;
 import com.java.flexilab.entities.Base;
 import com.java.flexilab.entities.sistem.CompraRealizada;
 import com.java.flexilab.entities.sistem.EnumMetodoPago;
@@ -9,21 +11,15 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
 @Entity
-public class Usuarios extends Base {
-    @NotBlank(message = "El nombre no puede estar vacio")
-    @Column
-    private String email;
-    @NotBlank(message = "La contraseña no puede estar vacia")
-    @Column
-    private String password;
-    @NotBlank(message = "El nombre no puede estar vacio")
-    @Column
-    private String nombre;
+@Table(name = "usuarios")
+public class Usuarios extends User {
     @NotBlank(message = "El pais no puede estar vacio")
     @Column
     private String pais;
@@ -33,7 +29,6 @@ public class Usuarios extends Base {
 
     @OneToMany
     private List<CompraRealizada> comprasRealizadas;
-
 
    public Usuarios(){
        super();

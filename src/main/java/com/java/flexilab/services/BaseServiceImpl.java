@@ -18,6 +18,14 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
         this.baseRepository = baseRepository;
     }
 
+    public List<E> findAllWithOutPage() throws Exception {
+        try {
+            return baseRepository.findAll();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @Override
     public Page<E> findAll(Pageable pageable) throws Exception {
         try {

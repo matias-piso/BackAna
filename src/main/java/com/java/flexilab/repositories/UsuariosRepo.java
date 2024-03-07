@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface UsuariosRepo extends BaseRepository<Usuarios, Integer>  {
 
+    Usuarios findByEmail(String email);
+
 }

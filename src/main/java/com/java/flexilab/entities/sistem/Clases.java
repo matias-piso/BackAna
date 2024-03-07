@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-public class Producto extends Base {
+public class Clases extends Base {
     @NotBlank(message = "El nombre no puede estar vacio")
     @Column
     private String nombre;
@@ -39,9 +39,6 @@ public class Producto extends Base {
     @NotNull(message = "El nivel no puede estar vacio")
     @Column
     private EnumNivel nivel;
-    @NotNull(message = "El pack no puede estar vacio")
-    @Column
-    private EnumPack pack;
 
     @Column
     private LocalDate fechaCreacion;
@@ -54,7 +51,7 @@ public class Producto extends Base {
     @ManyToOne
     private Admin admin;
 
-    public Producto(){
+    public Clases(){
         super();
         this.visitas = 0;
         this.fechaCreacion = LocalDate.now();

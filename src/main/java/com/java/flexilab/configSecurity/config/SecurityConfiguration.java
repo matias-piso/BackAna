@@ -2,6 +2,7 @@ package com.java.flexilab.configSecurity.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -55,7 +56,7 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
         jwtAuthenticationFilter.setAuthenticationManager(authManager);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
+        jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
 
         return http
                 .csrf().disable()
@@ -64,7 +65,13 @@ public class SecurityConfiguration {
                 .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/signup").permitAll()
                 .requestMatchers("/login").permitAll()
-                .requestMatchers("/api/**").hasAnyAuthority("admin")
+                //.requestMatchers(HttpMethod.GET, "/api/v1/categorias").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .requestMatchers(request -> "/api/v1/categorias".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "/api/v1/clases/page".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "/api/v1/clases/filtrar".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "PUT".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/clases/\\d+/sumarVisita")).permitAll() // Permitir acceso sin autenticación para el método PUT
+                .requestMatchers("/api/v1/usuarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .requestMatchers("/api/v1/admins/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

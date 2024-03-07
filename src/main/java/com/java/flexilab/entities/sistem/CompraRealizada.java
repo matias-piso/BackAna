@@ -3,7 +3,6 @@ package com.java.flexilab.entities.sistem;
 import jakarta.persistence.*;
 
 import com.java.flexilab.entities.Base;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +30,7 @@ public class CompraRealizada extends Base {
                  @JoinColumn (name = "CompraRealizadaID"),
             inverseJoinColumns =
                  @JoinColumn (name = "ProductoID"))
-    private List<Producto> producto;
+    private List<Clases> producto;
 
 
     public CompraRealizada(){
