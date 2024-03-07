@@ -2,12 +2,8 @@ package com.java.flexilab;
 
 import com.java.flexilab.configSecurity.model.Rol;
 import com.java.flexilab.entities.actors.Admin;
-import com.java.flexilab.entities.sistem.Categoria;
-import com.java.flexilab.entities.sistem.EnumNivel;
-import com.java.flexilab.entities.sistem.Clases;
-import com.java.flexilab.repositories.AdminRepo;
-import com.java.flexilab.repositories.CategoriaRepo;
-import com.java.flexilab.repositories.ClasesRepo;
+import com.java.flexilab.entities.sistem.*;
+import com.java.flexilab.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +17,7 @@ import java.util.Set;
 public class FlexilabApplication {
 
 	@Autowired
-	ClasesRepo productoRepo;
+	ClasesRepo clasesRepo;
 
 	@Autowired
 	AdminRepo adminRepo;
@@ -31,6 +27,12 @@ public class FlexilabApplication {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private ProductoRepo productoRepo;
+
+	@Autowired
+	private CategoriaProductoRepo categoriaProductoRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FlexilabApplication.class, args);
@@ -52,46 +54,61 @@ public class FlexilabApplication {
 
 			admin1 = adminRepo.save(admin1);
 
+			CategoriaProducto categoriaProducto1 = new CategoriaProducto("Categoria 1");
+			CategoriaProducto categoriaProducto2 = new CategoriaProducto("Categoria 2");
+			CategoriaProducto categoriaProducto3 = new CategoriaProducto("Categoria 3");
+			categoriaProductoRepo.save(categoriaProducto1);
+			categoriaProductoRepo.save(categoriaProducto2);
+			categoriaProductoRepo.save(categoriaProducto3);
+			
+			Producto producto1 = new Producto("Producto 1", "Descripción del producto 1", 100, 2000, 90, "url_foto_producto_1", categoriaProducto1, admin1);
+			productoRepo.save(producto1);
+			Producto producto2 = new Producto("Producto 2", "Descripción del producto 2", 200, 4000, 180, "url_foto_producto_2", categoriaProducto2, admin1);
+			productoRepo.save(producto2);
+			Producto producto3 = new Producto("Producto 3", "Descripción del producto 3", 300, 6000, 270, "url_foto_producto_3", categoriaProducto3, admin1);
+			productoRepo.save(producto3);
+
+
 			Categoria categoria1 = new Categoria("Categoria 1", "Descripción de la categoría 1", "url");
 			categoria1 = categoriaRepo.save(categoria1);
 
-			Clases producto1 = new Clases();
-			producto1.setNombre("Producto 1");
-			producto1.setDescripcion("Descripción del producto 1");
-			producto1.setPrecioDolar(100);
-			producto1.setPrecioPesos(2000);
-			producto1.setPrecioEuros(90);
-			producto1.setUrlFoto("https://media.glamour.mx/photos/642c5305347cb2132003b34a/16:9/w_1920,c_limit/yoga_y_estiramientos_diferencias.jpg");
-			producto1.setNivel(EnumNivel.AVANZADO);
-			producto1.setCategoria(categoria1);
-			producto1.setAdmin(admin1);
-			productoRepo.save(producto1);
+			Clases clase1 = new Clases();
+			clase1.setNombre("Clase 1");
+			clase1.setDescripcion("Descripción del producto 1");
+			clase1.setPrecioDolar(100);
+			clase1.setPrecioPesos(2000);
+			clase1.setPrecioEuros(90);
+			clase1.setUrlFoto("https://media.glamour.mx/photos/642c5305347cb2132003b34a/16:9/w_1920,c_limit/yoga_y_estiramientos_diferencias.jpg");
+			clase1.setNivel(EnumNivel.AVANZADO);
+			clase1.setCategoria(categoria1);
+			clase1.setAdmin(admin1);
+			clasesRepo.save(clase1);
 
-			Clases producto2 = new Clases();
-			producto2.setNombre("Producto 2");
-			producto2.setDescripcion("Descripción del producto 2");
-			producto2.setPrecioDolar(100);
-			producto2.setPrecioPesos(2000);
-			producto2.setPrecioEuros(90);
-			producto2.setUrlFoto("https://images.ecestaticos.com/gnBzw92jLNdX0ELHqXqKtdX71fM=/152x0:2173x1516/557x418/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Ffde%2F466%2Ff01%2Ffde466f01483ddb15a4d6d9d9cdd97ad.jpg");
-			producto2.setNivel(EnumNivel.INICIAL);
-			producto2.setCategoria(categoria1);
-			producto2.setAdmin(admin1);
-			productoRepo.save(producto2);
+			Clases clase2 = new Clases();
+			clase2.setNombre("Clase 2");
+			clase2.setDescripcion("Descripción del producto 2");
+			clase2.setPrecioDolar(100);
+			clase2.setPrecioPesos(2000);
+			clase2.setPrecioEuros(90);
+			clase2.setUrlFoto("https://images.ecestaticos.com/gnBzw92jLNdX0ELHqXqKtdX71fM=/152x0:2173x1516/557x418/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Ffde%2F466%2Ff01%2Ffde466f01483ddb15a4d6d9d9cdd97ad.jpg");
+			clase2.setNivel(EnumNivel.INICIAL);
+			clase2.setCategoria(categoria1);
+			clase2.setAdmin(admin1);
+			clasesRepo.save(clase2);
 
 			// Agregar 10 productos más de prueba
 			for (int i = 3; i <= 15; i++) {
-				Clases producto = new Clases();
-				producto.setNombre("Producto " + i);
-				producto.setDescripcion("Descripción del producto " + i);
-				producto.setPrecioDolar(100 * i);
-				producto.setPrecioPesos(2000 * i);
-				producto.setPrecioEuros(90 * i);
-				producto.setUrlFoto("url_foto_producto_" + i);
-				producto.setNivel(EnumNivel.INTERMEDIO);
-				producto.setCategoria(categoria1);
-				producto.setAdmin(admin1);
-				productoRepo.save(producto);
+				Clases clase = new Clases();
+				clase.setNombre("Clase " + i);
+				clase.setDescripcion("Descripción del clase " + i);
+				clase.setPrecioDolar(100 * i);
+				clase.setPrecioPesos(2000 * i);
+				clase.setPrecioEuros(90 * i);
+				clase.setUrlFoto("url_foto_producto_" + i);
+				clase.setNivel(EnumNivel.INTERMEDIO);
+				clase.setCategoria(categoria1);
+				clase.setAdmin(admin1);
+				clasesRepo.save(clase);
 			}
 
 		};

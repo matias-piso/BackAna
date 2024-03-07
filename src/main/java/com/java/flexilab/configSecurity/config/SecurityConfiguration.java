@@ -69,6 +69,9 @@ public class SecurityConfiguration {
                 .requestMatchers(request -> "/api/v1/categorias".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/clases/page".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/clases/filtrar".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "/api/v1/producto/page".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "/api/v1/producto/filtrar".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "/api/v1/categoriasProducto".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "PUT".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/clases/\\d+/sumarVisita")).permitAll() // Permitir acceso sin autenticación para el método PUT
                 .requestMatchers("/api/v1/usuarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers("/api/v1/admins/**").hasAnyAuthority("ROLE_ADMIN")

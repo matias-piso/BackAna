@@ -21,7 +21,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  */
 public class TokenUtils {
     private final static String ACCESS_TOKEN_SECRET = "4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud";
-    private final static Long ACCES_TOCKEN_LIFE = 60L; // 60 segundos
+    private final static Long ACCES_TOCKEN_LIFE = 24 * 60 * 60L; //24 horas en segundos
+
+
 
     /**
      * Crea un token de acceso con los datos proporcionados.
