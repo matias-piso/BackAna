@@ -64,7 +64,7 @@ public class ClasesController extends BaseControllerImpl<Clases, ClasesServiceIm
                     return ResponseEntity.status(HttpStatus.OK).body(service.findByCategoria(categoria, pageable));
                 }
             } else if (enumNivel != null) {
-                return ResponseEntity.status(HttpStatus.OK).body(service.findAll(pageable));
+                return ResponseEntity.status(HttpStatus.OK).body(service.findByNivel(enumNivel ,pageable));
             }
 
             // Agrega una declaración de retorno para manejar el caso en el que ninguna condición se cumpla

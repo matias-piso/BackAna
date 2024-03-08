@@ -66,6 +66,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/signup").permitAll()
                 .requestMatchers("/login").permitAll()
                 //.requestMatchers(HttpMethod.GET, "/api/v1/categorias").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .requestMatchers(request -> "/api/v1/enums".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/categorias".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/clases/page".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/clases/filtrar".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación

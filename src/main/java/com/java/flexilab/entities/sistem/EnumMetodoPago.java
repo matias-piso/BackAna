@@ -1,6 +1,10 @@
 package com.java.flexilab.entities.sistem;
 
+import lombok.Getter;
+
+@Getter
 public enum EnumMetodoPago {
-    TRANSFERENCIADOLAR,
-    MERCADOPAGO
+    MERCADOPAGO,
+    TRANSFERENCIA,
+    EFECTIVO,
 }
