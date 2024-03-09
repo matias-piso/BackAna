@@ -1,6 +1,7 @@
 package com.java.flexilab;
 
 import com.java.flexilab.configSecurity.model.Rol;
+import com.java.flexilab.configSecurity.repository.RolRepository;
 import com.java.flexilab.entities.actors.Admin;
 import com.java.flexilab.entities.sistem.*;
 import com.java.flexilab.repositories.*;
@@ -34,6 +35,9 @@ public class FlexilabApplication {
 	@Autowired
 	private CategoriaProductoRepo categoriaProductoRepo;
 
+	@Autowired
+	private RolRepository rolRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(FlexilabApplication.class, args);
 	}
@@ -44,6 +48,9 @@ public class FlexilabApplication {
 			if (args.length > 0) {
 				System.out.println("Hello " + args[0]);
 			}
+
+			Rol rolUser = new Rol("ROLE_USER", "Rol de usuario");
+			rolRepository.save(rolUser);
 
 			Admin admin1 = new Admin();
 			admin1.setEmail("test@gmail.com");

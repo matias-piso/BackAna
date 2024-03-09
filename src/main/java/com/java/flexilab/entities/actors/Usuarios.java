@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,11 +20,15 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "usuarios")
-public class Usuarios extends User {
-    @NotBlank(message = "El pais no puede estar vacio")
+public class Usuarios extends Base{
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    //@NotBlank(message = "El pais no puede estar vacio")
     @Column
     private String pais;
-    @NotBlank(message = "El metodo de pago no puede estar vacio")
+    //@NotBlank(message = "El metodo de pago no puede estar vacio")
     @Column
     private EnumMetodoPago metodoPago;
 
@@ -32,14 +37,14 @@ public class Usuarios extends User {
 
    public Usuarios(){
        super();
-       /*
-       if (this.pais.toUpperCase() == "ARGENTINA"){
-           this.metodoPago = MetodoPago.MERCADOPAGO;
-       }
-       else{
-           this.metodoPago = MetodoPago.TRANSFERENCIADOLAR;
-       }
-        */
+   }
+
+   public Usuarios(User user){
+       super();
+       this.user = user;
+       this.pais = null;
+       this.metodoPago = null;
+       this.comprasRealizadas = new ArrayList<>();
 
    }
 

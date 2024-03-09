@@ -3,7 +3,6 @@ package com.java.flexilab.controllers;
 import com.java.flexilab.configSecurity.model.User;
 import com.java.flexilab.entities.actors.Admin;
 import com.java.flexilab.services.AdminServiceImpl;
-import com.java.flexilab.services.UsuarioServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,8 @@ public class AdminController extends BaseControllerImpl<Admin, AdminServiceImpl>
     private AdminServiceImpl adminService;
 
     @GetMapping("/email/{email}")
-    public User findByEmail(@PathVariable(value = "email") String email) {
+    public Admin findByEmail(@PathVariable(value = "email") String email) {
+        System.out.println("Email: " + email);
         return adminService.findByEmail(email);
     }
 

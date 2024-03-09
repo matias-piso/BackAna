@@ -1,5 +1,7 @@
 package com.java.flexilab.configSecurity.service;
 
+import com.java.flexilab.entities.actors.Usuarios;
+import com.java.flexilab.repositories.UsuariosRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,12 +20,14 @@ import com.java.flexilab.configSecurity.repository.UserRepository;
  */
 @Service
 public class UserRegisterServiceImpl implements UserRegisterService {
+    @Autowired
+    private UserRepository usuarioRepository;
+
+    @Autowired
+    private UsuariosRepo usuarioRepo;
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Autowired
-    private UserRepository usuarioRepository;
 
     @Autowired
     private RolRepository rolRepository;
@@ -46,22 +50,30 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         }
 
         // Creo un nuevo usuario
-        User usuario = new User();
-        usuario.setNombre(userRegistration.getNombre());
-        usuario.setEmail(userRegistration.getEmail());
+        User user = new User();
+        user.setNombre(userRegistration.getNombre());
+        user.setEmail(userRegistration.getEmail());
+        user.setActivo(true);
 
         // Encriptar la contraseña utilizando BCrypt
         String encryptedPassword = passwordEncoder.encode(userRegistration.getPassword());
-        usuario.setPassword(encryptedPassword);
+        user.setPassword(encryptedPassword);
 
         // Asignar el rol de "usuario" al usuario registrado
-        rolRepository.findByNombre("usuario").ifPresent(usuarioRol -> usuario.getRoles().add(usuarioRol));
+        rolRepository.findByNombre("ROLE_USER").ifPresent(usuarioRol -> user.getRoles().add(usuarioRol));
 
         // Guardar el usuario en la base de datos
-        usuarioRepository.save(usuario);
+        usuarioRepository.save(user);
+
+        try {
+            usuarioRepo.save(new Usuarios(user));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new Exception("Error al registrar el usuario en el sistema.");
+        }
 
         // Cargar el usuario recién registrado en el sistema de Spring Security
-        UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getEmail());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
