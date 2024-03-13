@@ -13,10 +13,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Setter @Getter
 @Entity
 public class Producto extends Base {
+
+    private EnumTipo tipo;
+
     @NotBlank(message = "El nombre no puede estar vacio")
     @Column
     private String nombre;
@@ -37,7 +41,7 @@ public class Producto extends Base {
     private String UrlFoto;
 
     @Column
-    private LocalDate fechaCreacion;
+    private Date fechaCreacion;
 
     @NotNull(message = "La categoria no puede estar vacia")
     @ManyToOne
@@ -49,19 +53,23 @@ public class Producto extends Base {
 
 
     public Producto(String nombre, String descripcion, Integer precioDolar, Integer precioPesos, Integer precioEuros, String urlFoto, CategoriaProducto categoria, Admin admin) {
+        super();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioDolar = precioDolar;
         this.precioPesos = precioPesos;
         this.precioEuros = precioEuros;
-        UrlFoto = urlFoto;
+        this.UrlFoto = urlFoto;
         this.categoria = categoria;
         this.admin = admin;
-        this.fechaCreacion = LocalDate.now();
+        this.tipo = EnumTipo.PRODUCTO;
     }
     public Producto(){
         super();
-        this.fechaCreacion = LocalDate.now();
+        if (this.fechaCreacion == null){
+            this.fechaCreacion = new Date();
+        }
+        this.tipo = EnumTipo.PRODUCTO;
     }
 
 }

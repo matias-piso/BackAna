@@ -48,4 +48,7 @@ public class Usuarios extends Base{
 
    }
 
+    public void addCompraRealizada(CompraRealizada compraRealizada) {
+        this.comprasRealizadas.add(compraRealizada);
+    }
 }

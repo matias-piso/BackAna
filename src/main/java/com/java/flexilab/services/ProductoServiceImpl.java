@@ -22,4 +22,5 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Integer> impl
     public Page<Producto> findByCategoria(String nomCategoria, Pageable pageable) {
         return productoRepo.findByCategoriaNombre(nomCategoria, pageable);
     }
+
 }

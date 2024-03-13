@@ -63,7 +63,7 @@ public class SecurityConfiguration {
                 .cors().disable()
                 .authorizeRequests()
                 .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .requestMatchers("/signup").permitAll()
+                .requestMatchers("/api/v1/usuarios/signup").permitAll()
                 .requestMatchers("/login").permitAll()
                 //.requestMatchers(HttpMethod.GET, "/api/v1/categorias").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(request -> "/api/v1/enums".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
@@ -76,7 +76,8 @@ public class SecurityConfiguration {
                 .requestMatchers(request -> "PUT".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/clases/\\d+/sumarVisita")).permitAll() // Permitir acceso sin autenticación para el método PUT
                 .requestMatchers("/api/v1/usuarios/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers("/api/v1/admins/**").hasAnyAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
+                .requestMatchers(request -> "POST".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d+/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .requestMatchers(request -> "GET".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

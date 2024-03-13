@@ -17,7 +17,7 @@ import com.java.flexilab.configSecurity.service.UserRegisterService;
  */
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/signup")
+@RequestMapping("/api/v1/usuarios/signup")
 public class UserRegisterController {
 
     @Autowired

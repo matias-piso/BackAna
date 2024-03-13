@@ -11,11 +11,15 @@ import lombok.Setter;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Setter
 @Getter
 @Entity
 public class Clases extends Base {
+
+    private EnumTipo tipo;
+
     @NotBlank(message = "El nombre no puede estar vacio")
     @Column
     private String nombre;
@@ -41,7 +45,7 @@ public class Clases extends Base {
     private EnumNivel nivel;
 
     @Column
-    private LocalDate fechaCreacion;
+    private Date fechaCreacion;
 
     @NotNull(message = "La categoria no puede estar vacia")
     @ManyToOne
@@ -51,10 +55,14 @@ public class Clases extends Base {
     @ManyToOne
     private Admin admin;
 
+
     public Clases(){
         super();
         this.visitas = 0;
-        this.fechaCreacion = LocalDate.now();
+        if (this.fechaCreacion == null){
+            this.fechaCreacion = new Date();
+        }
+        this.tipo = EnumTipo.CLASE;
     }
 
     public void sumarVisita(){

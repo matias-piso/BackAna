@@ -1,19 +1,57 @@
 package com.java.flexilab.controllers;
 
 
-import com.java.flexilab.entities.sistem.Categoria;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.java.flexilab.DTO.CompraRealizadaDTO;
+import com.java.flexilab.configSecurity.config.TokenUtils;
+import com.java.flexilab.entities.actors.Usuarios;
 import com.java.flexilab.entities.sistem.CompraRealizada;
-import com.java.flexilab.services.CategoriaServiceImpl;
 import com.java.flexilab.services.CompraRealizadaServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.models.Response;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/v1/comprasrealizadas")
-public class CompraRealizadaController extends BaseControllerImpl<CompraRealizada, CompraRealizadaServiceImpl> {
+@RequestMapping(path = "/api/v1/cliente")
+public class CompraRealizadaController {
+
+    @Autowired
+    private CompraRealizadaServiceImpl compraRealizadaService;
+
+    @PostMapping("/{idUsuario}/compraRealizadas")
+    public ResponseEntity<?> saveCompraRealizada(@Valid @RequestBody CompraRealizadaDTO compraRealizada,
+                                                 @PathVariable Integer idUsuario, HttpServletRequest request) throws Exception {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            System.out.println("Compra realizada: " + mapper.writeValueAsString(compraRealizada));
+            return ResponseEntity.status(201).body(compraRealizadaService.save(compraRealizada, idUsuario, request));
+        }catch (ValidationException e){
+            return ResponseEntity.status(400).body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{idUsuario}/compraRealizadas")
+    public ResponseEntity<?> getComprasRealizadas(@PathVariable Integer idUsuario, HttpServletRequest request) {
+        try {
+            System.out.println("ID Usuario: " + idUsuario);
+            // Llamar al servicio para obtener las compras realizadas
+            return ResponseEntity.status(HttpStatus.OK).body(compraRealizadaService.getComprasRealizadas(idUsuario, request));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 
 }
