@@ -56,6 +56,7 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
 
             compraRealizada.setPrecio(compraRealizadaDTO.getPrecio());
             compraRealizada.setMetodoPago(EnumMetodoPago.valueOf(compraRealizadaDTO.getMetodoPago()));
+            compraRealizada.setEstado(EnumEstadoCompra.valueOf(compraRealizadaDTO.getEstado()));
 
             if (compraRealizada.getMetodoPago() == null) {
                 throw new Exception("El metodo de pago no compatible");

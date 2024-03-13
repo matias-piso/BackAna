@@ -28,6 +28,9 @@ public class CompraRealizada extends Base {
     @NotNull(message = "El metodo de pago no puede estar vacio")
     @Column
     private EnumMetodoPago metodoPago;
+    @NotNull(message = "El estado no puede estar vacio")
+    @Column
+    private EnumEstadoCompra estado;
 
     //@NotNull(message = "Las clases no pueden estar vacias")
     @ManyToMany
