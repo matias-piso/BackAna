@@ -2,6 +2,7 @@ package com.java.flexilab.entities.sistem;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.java.flexilab.DTO.ClaseCantidadDTO;
 import jakarta.persistence.*;
 
 import com.java.flexilab.entities.Base;
@@ -35,7 +36,7 @@ public class CompraRealizada extends Base {
                  @JoinColumn (name = "CompraRealizadaID"),
             inverseJoinColumns =
                  @JoinColumn (name = "claseID"))
-    private List<Clases> clases;
+    private List<ClaseCantidadDTO> clases;
 
     //@NotNull(message = "Los productos no pueden estar vacios")
     @ManyToMany
@@ -61,7 +62,7 @@ public class CompraRealizada extends Base {
         System.out.println("Productos: " + mapper.writeValueAsString(this.productos));
     }
 
-    public void addClases(List<Clases> clases) throws JsonProcessingException {
+    public void addClases(List<ClaseCantidadDTO> clases) throws JsonProcessingException {
         this.clases.addAll(clases);
         ObjectMapper mapper = new ObjectMapper();
         System.out.println("Clases: " + mapper.writeValueAsString(this.clases));

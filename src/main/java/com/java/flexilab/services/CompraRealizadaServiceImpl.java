@@ -1,22 +1,21 @@
 package com.java.flexilab.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.java.flexilab.DTO.ClaseCantidadDTO;
 import com.java.flexilab.DTO.CompraRealizadaDTO;
 import com.java.flexilab.configSecurity.config.TokenUtils;
 import com.java.flexilab.entities.actors.Usuarios;
 import com.java.flexilab.entities.sistem.*;
 import com.java.flexilab.interfaces.CompraRealizadaService;
 import com.java.flexilab.repositories.BaseRepository;
+import com.java.flexilab.repositories.ClaseCantidadDTORepo;
 import com.java.flexilab.repositories.CompraRealizadaRepo;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,6 +33,9 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
 
     @Autowired
     private ProductoServiceImpl productoService;
+
+    @Autowired
+    private ClaseCantidadDTORepo claseCantidadDTORepo;
 
 
     public CompraRealizadaServiceImpl(BaseRepository<CompraRealizada, Integer> baseRepository) {
@@ -59,7 +61,8 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
                 throw new Exception("El metodo de pago no compatible");
             }
 
-            List<Clases> clasesList = convertirClaseDTOAClase(compraRealizadaDTO.getClases());
+            List<ClaseCantidadDTO> clasesList = convertirClaseDTOAClase(compraRealizadaDTO.getClases());
+            System.out.println("Clases: " + mapper.writeValueAsString(clasesList));
             List<Producto> productosList = converitrProductoDTOAProducto(compraRealizadaDTO.getProductos());
 
             compraRealizada.addClases(clasesList);
@@ -74,12 +77,18 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
 
     }
 
-    private List<Clases> convertirClaseDTOAClase(List<Integer> clasesId) throws Exception {
-        List<Clases> clasesL = new ArrayList<>();
+    private List<ClaseCantidadDTO> convertirClaseDTOAClase(List<Integer> clasesId) throws Exception {
+        List<ClaseCantidadDTO> clasesL = new ArrayList<>();
         for (Integer claseId : clasesId) {
             // Realizar la conversión de ClaseDTO a Clase
             Clases clase = claseService.findById(claseId);
-            clasesL.add(clase);
+            ClaseCantidadDTO claseDTO = new ClaseCantidadDTO();
+            claseDTO.setClase(clase);
+
+            claseDTO = claseCantidadDTORepo.save(claseDTO);
+
+            clasesL.add(claseDTO);
+
         }
         return clasesL;
     }
