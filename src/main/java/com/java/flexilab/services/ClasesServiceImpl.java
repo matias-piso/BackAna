@@ -1,5 +1,6 @@
 package com.java.flexilab.services;
 
+import com.java.flexilab.DTO.ClaseCantidadDTO;
 import com.java.flexilab.entities.sistem.Categoria;
 import com.java.flexilab.entities.sistem.EnumNivel;
 import com.java.flexilab.entities.sistem.Clases;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClasesServiceImpl extends BaseServiceImpl<Clases, Integer> implements ClasesService {
@@ -35,6 +38,10 @@ public class ClasesServiceImpl extends BaseServiceImpl<Clases, Integer> implemen
 
     public Page<Clases> findByNivel(EnumNivel nivel, Pageable pageable) {
         return clasesRepo.findByNivel(nivel, pageable);
+    }
+
+    public List<Clases> findByIds(List<Integer> ids) {
+        return clasesRepo.findByIdIn(ids);
     }
 
 }

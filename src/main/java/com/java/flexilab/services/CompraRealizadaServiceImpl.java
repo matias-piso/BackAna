@@ -78,7 +78,7 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
 
     }
 
-    private List<ClaseCantidadDTO> convertirClaseDTOAClase(List<Integer> clasesId) throws Exception {
+    public List<ClaseCantidadDTO> convertirClaseDTOAClase(List<Integer> clasesId) throws Exception {
         List<ClaseCantidadDTO> clasesL = new ArrayList<>();
         for (Integer claseId : clasesId) {
             // Realizar la conversión de ClaseDTO a Clase
@@ -94,7 +94,7 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
         return clasesL;
     }
 
-    private List<Producto> converitrProductoDTOAProducto(List<Integer> productosId) throws Exception {
+    public List<Producto> converitrProductoDTOAProducto(List<Integer> productosId) throws Exception {
         List<Producto> productosL = new ArrayList<>();
         for (Integer productoId : productosId) {
             // Realizar la conversión de ProductoDTO a Producto

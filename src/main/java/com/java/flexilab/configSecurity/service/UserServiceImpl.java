@@ -21,4 +21,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> {
         super(baseRepository);
     }
 
+
+
 }

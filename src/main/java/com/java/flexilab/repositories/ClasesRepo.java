@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ClasesRepo extends BaseRepository<Clases, Integer>  {
     Page<Clases> findByCategoria(Categoria cat, Pageable pageable);
@@ -15,5 +17,7 @@ public interface ClasesRepo extends BaseRepository<Clases, Integer>  {
     Page<Clases> findByNivel(EnumNivel nivel, Pageable pageable);
 
     Page<Clases> findByCategoriaAndNivel(Categoria categoria, EnumNivel nivel, Pageable pageable);
+
+    List<Clases> findByIdIn(List<Integer> ids);
 
 }

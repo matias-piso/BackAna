@@ -75,7 +75,10 @@ public class SecurityConfiguration {
                 .requestMatchers(request -> "/api/v1/categoriasProducto".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "PUT".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/clases/\\d+/sumarVisita")).permitAll() // Permitir acceso sin autenticación para el método PUT
                 .requestMatchers("/api/v1/usuarios/email/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                .requestMatchers("/api/v1/usuarios").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/v1/usuarios/page/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/v1/usuarios/delete/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/v1/usuarios/update/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/v1/usuarios/**").hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers("/api/v1/admins/**").hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(request -> "POST".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d+/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(request -> "GET".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")

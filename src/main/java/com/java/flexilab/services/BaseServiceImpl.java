@@ -1,5 +1,6 @@
 package com.java.flexilab.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.flexilab.entities.Base;
 import com.java.flexilab.interfaces.BaseService;
 import com.java.flexilab.repositories.BaseRepository;
@@ -73,6 +74,11 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
                 Integer personId = entityOptional.get().getId();
                 entityOptional = Optional.of(entity);
                 entityOptional.get().setId(personId);
+                System.out.println("-----------------------------------------------------------------------------");
+                ObjectMapper mapper = new ObjectMapper();
+                System.out.println("Entity param: " + mapper.writeValueAsString(entity));
+                System.out.println("Entity modif: " + mapper.writeValueAsString(entityOptional.get()));
+                System.out.println("-----------------------------------------------------------------------------");
                 return baseRepository.save(entityOptional.get());
             }
             return null;

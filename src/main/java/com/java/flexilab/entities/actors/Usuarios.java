@@ -51,4 +51,13 @@ public class Usuarios extends Base{
     public void addCompraRealizada(CompraRealizada compraRealizada) {
         this.comprasRealizadas.add(compraRealizada);
     }
+
+    public void removeCompraRealizada(CompraRealizada compraRealizada) {
+        this.comprasRealizadas.remove(compraRealizada);
+    }
+
+    public void setUserNombreEmail(String nombre, String email) {
+        this.user.setNombre(nombre);
+        this.user.setEmail(email);
+    }
 }

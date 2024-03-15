@@ -4,11 +4,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Setter @Getter
 public class CompraRealizadaDTO {
 
+    private Integer id;
+    private Boolean activo;
+    private Date fecha;
     @NotNull(message = "El precio no puede estar vacio")
     private Integer precio;
     @NotNull(message = "El metodo de pago no puede estar vacio")
@@ -19,5 +23,19 @@ public class CompraRealizadaDTO {
     private List<Integer> productos;
     @NotNull(message = "Los productos no pueden estar vacios")
     private List<Integer> clases;
+
+    public CompraRealizadaDTO() {
+        super();
+    }
+
+    public CompraRealizadaDTO(Integer id, Boolean activo, Integer precio, String metodoPago, String estado, List<Integer> productos, List<Integer> clases) {
+        this.id = id;
+        this.activo = activo;
+        this.precio = precio;
+        this.metodoPago = metodoPago;
+        this.estado = estado;
+        this.productos = productos;
+        this.clases = clases;
+    }
 
 }

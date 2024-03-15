@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoServiceImpl extends BaseServiceImpl<Producto, Integer> implements ProductoService {
 
@@ -21,6 +23,10 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Integer> impl
 
     public Page<Producto> findByCategoria(String nomCategoria, Pageable pageable) {
         return productoRepo.findByCategoriaNombre(nomCategoria, pageable);
+    }
+
+    public List<Producto> findByIds(List<Integer> ids) {
+        return productoRepo.findByIdIn(ids);
     }
 
 }
