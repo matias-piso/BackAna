@@ -3,6 +3,7 @@ package com.java.flexilab.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.flexilab.DTO.CompraRealizadaDTO;
+import com.java.flexilab.DTO.CompraRealizadaDTOupdate;
 import com.java.flexilab.configSecurity.config.TokenUtils;
 import com.java.flexilab.entities.actors.Usuarios;
 import com.java.flexilab.entities.sistem.CompraRealizada;
@@ -22,13 +23,13 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/v1/cliente")
+@RequestMapping(path = "/api/v1/")
 public class CompraRealizadaController {
 
     @Autowired
     private CompraRealizadaServiceImpl compraRealizadaService;
 
-    @PostMapping("/{idUsuario}/compraRealizadas")
+    @PostMapping("/cliente/{idUsuario}/compraRealizadas")
     public ResponseEntity<?> saveCompraRealizada(@Valid @RequestBody CompraRealizadaDTO compraRealizada,
                                                  @PathVariable Integer idUsuario, HttpServletRequest request) throws Exception {
         try {
@@ -38,11 +39,25 @@ public class CompraRealizadaController {
         }catch (ValidationException e){
             return ResponseEntity.status(400).body(e.getMessage());
         }catch (Exception e){
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
-    @GetMapping("/{idUsuario}/compraRealizadas")
+    @PutMapping("/compraRealizada/{idCompraRealizada}")
+    public ResponseEntity<?> updateCompraRealizada(@Valid @RequestBody CompraRealizadaDTOupdate compraRealizadaDTOupdate,
+                                                   @PathVariable Integer idCompraRealizada, HttpServletRequest request) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            System.out.println("Compra realizada: " + mapper.writeValueAsString(compraRealizadaDTOupdate));
+            return ResponseEntity.status(201).body(compraRealizadaService.updateCompraRealizada(compraRealizadaDTOupdate, idCompraRealizada, request));
+        } catch (ValidationException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/cliente/{idUsuario}/compraRealizadas")
     public ResponseEntity<?> getComprasRealizadas(@PathVariable Integer idUsuario, HttpServletRequest request) {
         try {
             System.out.println("ID Usuario: " + idUsuario);

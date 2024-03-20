@@ -52,7 +52,7 @@ public class Producto extends Base {
     private Admin admin;
 
 
-    public Producto(String nombre, String descripcion, Integer precioDolar, Integer precioPesos, Integer precioEuros, String urlFoto, CategoriaProducto categoria, Admin admin) {
+    public Producto(String nombre, String descripcion, Integer precioDolar, Integer precioPesos, Integer precioEuros, String urlFoto, CategoriaProducto categoria, Admin admin, String tipo) {
         super();
         this.nombre = nombre;
         this.descripcion = descripcion;

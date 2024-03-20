@@ -6,18 +6,21 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @Entity
 public class ClaseCantidadDTO {
-
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Getter
+    @Setter
     @ManyToOne
     private Clases clase;
 
+    @Getter
+    @Setter
     private Integer cantidadDisponible;
 
     public ClaseCantidadDTO(){

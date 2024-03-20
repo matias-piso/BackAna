@@ -68,11 +68,11 @@ public class FlexilabApplication {
 			categoriaProductoRepo.save(categoriaProducto2);
 			categoriaProductoRepo.save(categoriaProducto3);
 			
-			Producto producto1 = new Producto("Producto 1", "Descripción del producto 1", 100, 2000, 90, "url_foto_producto_1", categoriaProducto1, admin1);
+			Producto producto1 = new Producto("Producto 1", "Descripción del producto 1", 100, 2000, 90, "url_foto_producto_1", categoriaProducto1, admin1,"");
 			productoRepo.save(producto1);
-			Producto producto2 = new Producto("Producto 2", "Descripción del producto 2", 200, 4000, 180, "url_foto_producto_2", categoriaProducto2, admin1);
+			Producto producto2 = new Producto("Producto 2", "Descripción del producto 2", 200, 4000, 180, "url_foto_producto_2", categoriaProducto2, admin1,"");
 			productoRepo.save(producto2);
-			Producto producto3 = new Producto("Producto 3", "Descripción del producto 3", 300, 6000, 270, "url_foto_producto_3", categoriaProducto3, admin1);
+			Producto producto3 = new Producto("Producto 3", "Descripción del producto 3", 300, 6000, 270, "url_foto_producto_3", categoriaProducto3, admin1,"");
 			productoRepo.save(producto3);
 
 
@@ -120,4 +120,5 @@ public class FlexilabApplication {
 
 		};
 	}
+
 }

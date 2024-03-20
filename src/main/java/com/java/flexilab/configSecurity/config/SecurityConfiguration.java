@@ -67,6 +67,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/login").permitAll()
                 //.requestMatchers(HttpMethod.GET, "/api/v1/categorias").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(request -> "/api/v1/enums".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
+                .requestMatchers(request -> "/api/v1/enums/estadoCompra".equals(request.getRequestURI())).hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(request -> "/api/v1/categorias".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/clases/page".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
                 .requestMatchers(request -> "/api/v1/clases/filtrar".equals(request.getRequestURI())).permitAll() // Permitir acceso sin autenticación
@@ -82,6 +83,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/v1/admins/**").hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(request -> "POST".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d+/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(request -> "GET".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .requestMatchers("/api/v1/compraRealizada/\\d+").hasAnyAuthority("ROLE_ADMIN")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

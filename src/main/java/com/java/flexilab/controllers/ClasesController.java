@@ -78,8 +78,6 @@ public class ClasesController extends BaseControllerImpl<Clases, ClasesServiceIm
     }
 
 
-
-
     @PutMapping("/{id}/sumarVisita")
     public ResponseEntity<?> sumarVisita(@PathVariable Integer id, @RequestBody SumarVisitaDTO sumarVisitaDTO) {
         try {

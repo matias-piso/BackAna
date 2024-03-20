@@ -68,4 +68,22 @@ public class Clases extends Base {
     public void sumarVisita(){
         this.visitas++;
     }
+
+    public Clases (String nombre, String descripcion, Integer precioDolar, Integer precioPesos, Integer precioEuros, String UrlFoto, String nivel, Categoria categoria, Admin admin, String tipo){
+        super();
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precioDolar = precioDolar;
+        this.precioPesos = precioPesos;
+        this.precioEuros = precioEuros;
+        this.UrlFoto = UrlFoto;
+        this.nivel = EnumNivel.valueOf(nivel);
+        this.categoria = categoria;
+        this.admin = admin;
+        this.visitas = 0;
+        if (this.fechaCreacion == null){
+            this.fechaCreacion = new Date();
+        }
+        this.tipo = EnumTipo.CLASE;
+    }
 }

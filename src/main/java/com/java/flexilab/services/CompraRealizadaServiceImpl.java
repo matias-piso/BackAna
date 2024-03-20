@@ -2,7 +2,9 @@ package com.java.flexilab.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.flexilab.DTO.ClaseCantidadDTO;
+import com.java.flexilab.DTO.ClaseDTOupdate;
 import com.java.flexilab.DTO.CompraRealizadaDTO;
+import com.java.flexilab.DTO.CompraRealizadaDTOupdate;
 import com.java.flexilab.configSecurity.config.TokenUtils;
 import com.java.flexilab.entities.actors.Usuarios;
 import com.java.flexilab.entities.sistem.*;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -143,6 +146,34 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
         if (!email.equals(usuarioService.findById(idUsuario).getUser().getEmail())) {
             throw new RuntimeException("No tiene permisos para acceder a este recurso");
         }
+    }
 
+    @Transactional
+    public CompraRealizada updateCompraRealizada(CompraRealizadaDTOupdate compraRealizadaDTOupdate, Integer idCompraRealizada, HttpServletRequest request) throws Exception {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            // buscar la compra realizada
+            CompraRealizada compraRealizadaDB = findById(idCompraRealizada);
+            System.out.println("Compra realizada BDD: " + mapper.writeValueAsString(compraRealizadaDB));
+            // modifico el estado de la compra realizada
+            compraRealizadaDB.setEstado(EnumEstadoCompra.valueOf(compraRealizadaDTOupdate.getEstadoCompra()));
+            // modifico la cantidad de clases disponibles de todas las clases
+            List<ClaseCantidadDTO> clases = new ArrayList<>();
+            System.out.println("Entre en el update");
+            System.out.println("Clases: " + mapper.writeValueAsString(compraRealizadaDTOupdate.getClases()));
+            for (ClaseDTOupdate clase : compraRealizadaDTOupdate.getClases()) {
+                System.out.println("Clase: " + mapper.writeValueAsString(clase));
+                ClaseCantidadDTO claseCantidadDTO = claseCantidadDTORepo.findById(clase.getId()).get();
+                claseCantidadDTO.setCantidadDisponible(clase.getCantidadDisponible());
+                clases.add(claseCantidadDTO);
+                System.out.println("Clase: " + mapper.writeValueAsString(claseCantidadDTO));
+            }
+            compraRealizadaDB.setClases(clases);
+            System.out.println("Compra realizada BDD CON CAMBIOS: " + mapper.writeValueAsString(compraRealizadaDB));
+            return save(compraRealizadaDB);
+            //return null;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 }

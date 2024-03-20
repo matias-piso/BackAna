@@ -2,6 +2,7 @@ package com.java.flexilab.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.java.flexilab.entities.sistem.EnumEstadoCompra;
 import com.java.flexilab.entities.sistem.EnumMetodoPago;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,11 @@ public class EnumController {
     @GetMapping("")
     public List<EnumMetodoPago> getEnums() {
         return List.of(EnumMetodoPago.values());
+    }
+
+    @GetMapping("/estadoCompra")
+    public List<EnumEstadoCompra> getEnumsEstadoCompra() {
+        return List.of(EnumEstadoCompra.values());
     }
 
 

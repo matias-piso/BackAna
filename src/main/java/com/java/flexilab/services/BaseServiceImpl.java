@@ -2,8 +2,10 @@ package com.java.flexilab.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.java.flexilab.entities.Base;
+import com.java.flexilab.entities.sistem.CompraRealizada;
 import com.java.flexilab.interfaces.BaseService;
 import com.java.flexilab.repositories.BaseRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
