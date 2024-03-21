@@ -1,5 +1,6 @@
 package com.java.flexilab.DTO;
 
+import com.java.flexilab.entities.sistem.HorarioClase;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,8 @@ public class CompraRealizadaDTO {
     private List<Integer> productos;
     @NotNull(message = "Los productos no pueden estar vacios")
     private List<Integer> clases;
+    @NotNull(message = "El horario de la clase no puede estar vacio")
+    private HorarioClase horarioClase;
 
     public CompraRealizadaDTO() {
         super();

@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -37,6 +39,9 @@ public class FlexilabApplication {
 
 	@Autowired
 	private RolRepository rolRepository;
+
+	@Autowired
+	private HorarioClaseRepo horarioClaseRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FlexilabApplication.class, args);
@@ -71,7 +76,25 @@ public class FlexilabApplication {
 			categoriaProductoRepo.save(categoriaProducto1);
 			categoriaProductoRepo.save(categoriaProducto2);
 			categoriaProductoRepo.save(categoriaProducto3);
-			
+
+			for (int i = 12; i < 22 ; i++) {
+				HorarioClase horario;
+				horario = new HorarioClase("LU", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+				horario = new HorarioClase("MA", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+				horario = new HorarioClase("MI", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+				horario = new HorarioClase("JU", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+				horario = new HorarioClase("VI", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+				horario = new HorarioClase("SA", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+				horario = new HorarioClase("DO", LocalTime.of(i, 0));
+				horarioClaseRepo.save(horario);
+			}
+
 			Producto producto1 = new Producto("Producto 1", "Descripción del producto 1", 100, 2000, 90, "url_foto_producto_1", categoriaProducto1, admin1,"");
 			productoRepo.save(producto1);
 			Producto producto2 = new Producto("Producto 2", "Descripción del producto 2", 200, 4000, 180, "url_foto_producto_2", categoriaProducto2, admin1,"");
@@ -79,6 +102,7 @@ public class FlexilabApplication {
 			Producto producto3 = new Producto("Producto 3", "Descripción del producto 3", 300, 6000, 270, "url_foto_producto_3", categoriaProducto3, admin1,"");
 			productoRepo.save(producto3);
 
+			List<HorarioClase> horarios = horarioClaseRepo.findAll();
 
 			Categoria categoria1 = new Categoria("Categoria 1", "Descripción de la categoría 1", "url");
 			categoria1 = categoriaRepo.save(categoria1);
@@ -93,6 +117,7 @@ public class FlexilabApplication {
 			clase1.setNivel(EnumNivel.AVANZADO);
 			clase1.setCategoria(categoria1);
 			clase1.setAdmin(admin1);
+			clase1.setHorariosDisponibles(horarios);
 			clasesRepo.save(clase1);
 
 			Clases clase2 = new Clases();
@@ -105,6 +130,7 @@ public class FlexilabApplication {
 			clase2.setNivel(EnumNivel.INICIAL);
 			clase2.setCategoria(categoria1);
 			clase2.setAdmin(admin1);
+			clase2.setHorariosDisponibles(horarios);
 			clasesRepo.save(clase2);
 
 			// Agregar 10 productos más de prueba

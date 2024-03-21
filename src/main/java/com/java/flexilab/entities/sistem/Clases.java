@@ -10,8 +10,6 @@ import lombok.Setter;
 
 import jakarta.persistence.Entity;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class Clases extends Base {
     @Column
     private Date fechaCreacion;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<HorarioClase> horariosDisponibles;
 
     @NotNull(message = "La categoria no puede estar vacia")
@@ -90,5 +88,9 @@ public class Clases extends Base {
             this.fechaCreacion = new Date();
         }
         this.tipo = EnumTipo.CLASE;
+    }
+
+    public void addHorario(HorarioClase horario){
+        this.horariosDisponibles.add(horario);
     }
 }
