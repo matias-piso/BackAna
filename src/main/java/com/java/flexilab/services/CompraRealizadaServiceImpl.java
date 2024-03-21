@@ -151,25 +151,18 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
     @Transactional
     public CompraRealizada updateCompraRealizada(CompraRealizadaDTOupdate compraRealizadaDTOupdate, Integer idCompraRealizada, HttpServletRequest request) throws Exception {
         try {
-            ObjectMapper mapper = new ObjectMapper();
             // buscar la compra realizada
             CompraRealizada compraRealizadaDB = findById(idCompraRealizada);
-            System.out.println("Compra realizada BDD: " + mapper.writeValueAsString(compraRealizadaDB));
             // modifico el estado de la compra realizada
             compraRealizadaDB.setEstado(EnumEstadoCompra.valueOf(compraRealizadaDTOupdate.getEstadoCompra()));
             // modifico la cantidad de clases disponibles de todas las clases
             List<ClaseCantidadDTO> clases = new ArrayList<>();
-            System.out.println("Entre en el update");
-            System.out.println("Clases: " + mapper.writeValueAsString(compraRealizadaDTOupdate.getClases()));
             for (ClaseDTOupdate clase : compraRealizadaDTOupdate.getClases()) {
-                System.out.println("Clase: " + mapper.writeValueAsString(clase));
                 ClaseCantidadDTO claseCantidadDTO = claseCantidadDTORepo.findById(clase.getId()).get();
                 claseCantidadDTO.setCantidadDisponible(clase.getCantidadDisponible());
                 clases.add(claseCantidadDTO);
-                System.out.println("Clase: " + mapper.writeValueAsString(claseCantidadDTO));
             }
             compraRealizadaDB.setClases(clases);
-            System.out.println("Compra realizada BDD CON CAMBIOS: " + mapper.writeValueAsString(compraRealizadaDB));
             return save(compraRealizadaDB);
             //return null;
         }catch (Exception e){

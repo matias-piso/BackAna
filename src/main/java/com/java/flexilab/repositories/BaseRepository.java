@@ -12,4 +12,5 @@ import java.util.List;
 @NoRepositoryBean
 public interface BaseRepository<E extends Base, ID extends Serializable> extends JpaRepository<E,ID> {
     Page<E> findByActivoTrue(Pageable pageable);
+    Page<E> findByActivoFalse(Pageable pageable);
 }

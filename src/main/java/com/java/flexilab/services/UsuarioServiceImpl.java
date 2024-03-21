@@ -29,11 +29,6 @@ public class UsuarioServiceImpl {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    private ProductoServiceImpl productoService;
-
-    @Autowired
-    private ClasesServiceImpl claseService;
 
     public Usuarios findByEmail(String email) {
         Usuarios usu = usuariosRepository.findByUserEmail(email);

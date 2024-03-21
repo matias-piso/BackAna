@@ -35,7 +35,7 @@ public class UserRegisterController {
     public ResponseEntity<?> registerUser(@RequestBody UserRegister userRegistration) {
 
         try {
-            if (usuarioRegisterService.registerUser(userRegistration))
+            if (usuarioRegisterService.registerUser(userRegistration, "ROLE_USER"))
                 return new ResponseEntity<>(HttpStatus.CREATED);
 
 

@@ -48,6 +48,15 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
     }
 
     @Override
+    public Page<E> findAllByActivoFalse(Pageable pageable) throws Exception {
+        try {
+            return baseRepository.findByActivoFalse(pageable);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public E findById(ID id) throws Exception {
         try {
             Optional<E> optional = baseRepository.findById(id);

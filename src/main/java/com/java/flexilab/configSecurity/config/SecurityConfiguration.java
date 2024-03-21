@@ -84,6 +84,8 @@ public class SecurityConfiguration {
                 .requestMatchers(request -> "POST".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d+/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(request -> "GET".equals(request.getMethod()) && request.getRequestURI().matches("/api/v1/cliente/\\d/comprasrealizadas")).hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers("/api/v1/compraRealizada/\\d+").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/v1/profesores").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/v1/profesores/**").hasAnyAuthority("ROLE_ADMIN")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

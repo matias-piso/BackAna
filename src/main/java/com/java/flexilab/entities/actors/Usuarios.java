@@ -3,6 +3,7 @@ package com.java.flexilab.entities.actors;
 import com.java.flexilab.configSecurity.model.Rol;
 import com.java.flexilab.configSecurity.model.User;
 import com.java.flexilab.entities.Base;
+import com.java.flexilab.entities.sistem.Aula;
 import com.java.flexilab.entities.sistem.CompraRealizada;
 import com.java.flexilab.entities.sistem.EnumMetodoPago;
 
@@ -34,6 +35,10 @@ public class Usuarios extends Base{
 
     @OneToMany
     private List<CompraRealizada> comprasRealizadas;
+
+    @ManyToOne
+    @JoinColumn(name = "aula_id")
+    private Aula aula;
 
    public Usuarios(){
        super();

@@ -42,12 +42,16 @@ public class FlexilabApplication {
 		SpringApplication.run(FlexilabApplication.class, args);
 	}
 
+
 	@Bean
 	public CommandLineRunner init() {
 		return (args) -> {
 			if (args.length > 0) {
 				System.out.println("Hello " + args[0]);
 			}
+
+			Rol rolProfe = new Rol("ROLE_PROFESOR", "Rol de profesor");
+			rolRepository.save(rolProfe);
 
 			Rol rolUser = new Rol("ROLE_USER", "Rol de usuario");
 			rolRepository.save(rolUser);
@@ -120,5 +124,7 @@ public class FlexilabApplication {
 
 		};
 	}
+
+
 
 }

@@ -42,8 +42,8 @@ public class UserRegisterServiceImpl implements UserRegisterService {
      * @return true si el usuario se registró correctamente, false en caso contrario.
      * @throws Exception si ocurre un error durante el registro del usuario.
      */
-    @Override
-    public boolean registerUser(UserRegister userRegistration) throws Exception {
+
+    public boolean registerUser(UserRegister userRegistration, String rol) throws Exception {
         // Verificar si el correo electrónico ya está registrado
         if (usuarioRepository.findOneByEmail(userRegistration.getEmail()).isPresent()) {
             throw new Exception("El mail ya esta registrado.");
@@ -60,7 +60,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         user.setPassword(encryptedPassword);
 
         // Asignar el rol de "usuario" al usuario registrado
-        rolRepository.findByNombre("ROLE_USER").ifPresent(usuarioRol -> user.getRoles().add(usuarioRol));
+        rolRepository.findByNombre(rol).ifPresent(usuarioRol -> user.getRoles().add(usuarioRol));
 
         // Guardar el usuario en la base de datos
         usuarioRepository.save(user);

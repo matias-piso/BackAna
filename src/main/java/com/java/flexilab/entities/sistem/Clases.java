@@ -11,7 +11,9 @@ import lombok.Setter;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -46,6 +48,9 @@ public class Clases extends Base {
 
     @Column
     private Date fechaCreacion;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<HorarioClase> horariosDisponibles;
 
     @NotNull(message = "La categoria no puede estar vacia")
     @ManyToOne

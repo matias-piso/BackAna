@@ -11,6 +11,6 @@ public interface  UserRegisterService {
      * @return true si el usuario se registra correctamente, false en caso contrario.
      * @throws Exception si ocurre un error durante el registro del usuario.
      */
-    boolean registerUser(UserRegister userRegistration) throws Exception;
+    boolean registerUser(UserRegister userRegistration, String rol) throws Exception;
 }
 

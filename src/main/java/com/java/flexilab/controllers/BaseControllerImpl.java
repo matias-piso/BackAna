@@ -53,6 +53,19 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     }
 
     @Override
+    @GetMapping(path = {"/page/inactivos"})
+    public ResponseEntity<?> getRecordByInactives(Pageable pageable, @RequestParam(name = "sort", required = false) String sort) {
+        try{
+            if (sort != null) {
+                pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(sort));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(service.findAllByActivoFalse(pageable));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");
+        }
+    }
+
+    @Override
     @GetMapping(path = {"/{id}","/{id}/"})
     public ResponseEntity<?> getRecordById(@PathVariable Integer id) {
         try {
@@ -65,6 +78,7 @@ public abstract class BaseControllerImpl < E extends Base, S extends BaseService
     @Override
     @PostMapping(path = {"","/"})
     public ResponseEntity<?> saveRecord(@Valid @RequestBody E entity, BindingResult result) {
+        System.out.println("Entity: " + entity);
         if (result.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result.getFieldError().getDefaultMessage());
         } else {

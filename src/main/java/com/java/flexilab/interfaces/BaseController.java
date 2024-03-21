@@ -14,6 +14,7 @@ import java.io.Serializable;
 public interface BaseController <E extends Base, ID extends Serializable> {
     public ResponseEntity<?> getRecordBy(Pageable pageable,  @RequestParam(name = "sort", required = false) String sort) throws Exception;
     public ResponseEntity<?> getRecordByActives(Pageable pageable,  @RequestParam(name = "sort", required = false) String sort) throws Exception;
+    public ResponseEntity<?> getRecordByInactives(Pageable pageable,  @RequestParam(name = "sort", required = false) String sort) throws Exception;
     public ResponseEntity<?> getRecordById(@PathVariable ID id) throws Exception;
     public ResponseEntity<?> saveRecord(@Valid @RequestBody E entity, BindingResult result) throws Exception;
     public ResponseEntity<?> updateRecord(@PathVariable Integer id,@Valid @RequestBody E entity, BindingResult result) throws Exception;
