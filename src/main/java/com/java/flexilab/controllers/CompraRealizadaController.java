@@ -36,6 +36,7 @@ public class CompraRealizadaController {
             ObjectMapper mapper = new ObjectMapper();
             System.out.println("Compra realizada: " + mapper.writeValueAsString(compraRealizada));
             return ResponseEntity.status(201).body(compraRealizadaService.save(compraRealizada, idUsuario, request));
+            //return null;
         }catch (ValidationException e){
             return ResponseEntity.status(400).body(e.getMessage());
         }catch (Exception e){

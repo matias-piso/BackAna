@@ -1,10 +1,8 @@
 package com.java.flexilab.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.java.flexilab.DTO.ClaseCantidadDTO;
-import com.java.flexilab.DTO.ClaseDTOupdate;
-import com.java.flexilab.DTO.CompraRealizadaDTO;
-import com.java.flexilab.DTO.CompraRealizadaDTOupdate;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.java.flexilab.DTO.*;
 import com.java.flexilab.configSecurity.config.TokenUtils;
 import com.java.flexilab.entities.actors.Usuarios;
 import com.java.flexilab.entities.sistem.*;
@@ -12,6 +10,7 @@ import com.java.flexilab.interfaces.CompraRealizadaService;
 import com.java.flexilab.repositories.BaseRepository;
 import com.java.flexilab.repositories.ClaseCantidadDTORepo;
 import com.java.flexilab.repositories.CompraRealizadaRepo;
+import com.java.flexilab.repositories.HorarioClaseRepo;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +38,9 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
 
     @Autowired
     private ClaseCantidadDTORepo claseCantidadDTORepo;
+
+    @Autowired
+    private HorarioClaseRepo horarioClaseRepo;
 
 
     public CompraRealizadaServiceImpl(BaseRepository<CompraRealizada, Integer> baseRepository) {
@@ -81,18 +83,25 @@ public class CompraRealizadaServiceImpl extends BaseServiceImpl<CompraRealizada,
 
     }
 
-    public List<ClaseCantidadDTO> convertirClaseDTOAClase(List<Integer> clasesId) throws Exception {
+    public List<ClaseCantidadDTO> convertirClaseDTOAClase(List<ClaseDTOpost> clasesDTOpost) throws Exception {
+        // Crear un ObjectMapper y registrar el módulo JavaTimeModule
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
         List<ClaseCantidadDTO> clasesL = new ArrayList<>();
-        for (Integer claseId : clasesId) {
+        for (ClaseDTOpost claseDTOpost : clasesDTOpost) {
             // Realizar la conversión de ClaseDTO a Clase
-            Clases clase = claseService.findById(claseId);
+            Clases clase = claseService.findById(claseDTOpost.getClaseId());
             ClaseCantidadDTO claseDTO = new ClaseCantidadDTO();
             claseDTO.setClase(clase);
+
+            claseDTO.setCantidadDisponible(claseDTOpost.getCantidadDisponible());
+            HorarioClase hrCl = horarioClaseRepo.findById(claseDTOpost.getDiaHorarioClaseId()).get();
+            claseDTO.setDiaHorarioClase(hrCl);
 
             claseDTO = claseCantidadDTORepo.save(claseDTO);
 
             clasesL.add(claseDTO);
-
         }
         return clasesL;
     }

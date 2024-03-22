@@ -1,14 +1,17 @@
 package com.java.flexilab.DTO;
 
-import com.java.flexilab.entities.sistem.HorarioClase;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
 @Setter @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompraRealizadaDTO {
 
     private Integer id;
@@ -23,22 +26,8 @@ public class CompraRealizadaDTO {
     @NotNull(message = "Las clases no pueden estar vacias")
     private List<Integer> productos;
     @NotNull(message = "Los productos no pueden estar vacios")
-    private List<Integer> clases;
-    @NotNull(message = "El horario de la clase no puede estar vacio")
-    private HorarioClase horarioClase;
+    private List<ClaseDTOpost> clases;
 
-    public CompraRealizadaDTO() {
-        super();
-    }
-
-    public CompraRealizadaDTO(Integer id, Boolean activo, Integer precio, String metodoPago, String estado, List<Integer> productos, List<Integer> clases) {
-        this.id = id;
-        this.activo = activo;
-        this.precio = precio;
-        this.metodoPago = metodoPago;
-        this.estado = estado;
-        this.productos = productos;
-        this.clases = clases;
-    }
-
+    // Constructor, getters y setters
 }
+

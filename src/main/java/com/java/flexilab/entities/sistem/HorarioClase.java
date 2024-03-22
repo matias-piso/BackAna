@@ -1,5 +1,6 @@
 package com.java.flexilab.entities.sistem;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.java.flexilab.entities.Base;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.Date;
+
+import java.sql.Time;
 
 @Entity
 @Getter
@@ -24,11 +28,10 @@ public class HorarioClase extends Base {
     private EnumDia dia;
 
     @NotNull
-    private LocalTime hora;
+    private Time hora;
 
-    public HorarioClase(String dia, LocalTime hora) {
+    public HorarioClase(String dia, Time hora) {
         this.dia = EnumDia.valueOf(dia);
         this.hora = hora;
     }
-
 }

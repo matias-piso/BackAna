@@ -12,7 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.Time;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -77,22 +79,15 @@ public class FlexilabApplication {
 			categoriaProductoRepo.save(categoriaProducto2);
 			categoriaProductoRepo.save(categoriaProducto3);
 
-			for (int i = 12; i < 22 ; i++) {
-				HorarioClase horario;
-				horario = new HorarioClase("LU", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
-				horario = new HorarioClase("MA", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
-				horario = new HorarioClase("MI", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
-				horario = new HorarioClase("JU", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
-				horario = new HorarioClase("VI", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
-				horario = new HorarioClase("SA", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
-				horario = new HorarioClase("DO", LocalTime.of(i, 0));
-				horarioClaseRepo.save(horario);
+
+			for (int i = 21; i < 22; i++) {
+				Time hora = Time.valueOf(LocalTime.of(i, 0));
+
+				// Crea y guarda los objetos HorarioClase con la hora correspondiente
+				for (String dia : Arrays.asList("LU", "MA", "MI", "JU", "VI", "SA", "DO")) {
+					HorarioClase horario = new HorarioClase(dia, hora);
+					horarioClaseRepo.save(horario);
+				}
 			}
 
 			Producto producto1 = new Producto("Producto 1", "Descripción del producto 1", 100, 2000, 90, "url_foto_producto_1", categoriaProducto1, admin1,"");
